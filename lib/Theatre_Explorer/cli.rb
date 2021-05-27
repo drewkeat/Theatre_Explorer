@@ -30,20 +30,25 @@ class CLI
     end
 
     def year_search
-        system("clear")
-        puts "Searching by year"
-        input = gets.strip.downcase
+        puts "========================"
+        puts "What year would you like to explore?"
+        puts "I can pull records dating back to 1832."
+        puts "========================"
+        puts ""
+            input = gets.strip.downcase
         if input == "exit"
             goodbye 
         else
-            
+
         end
     end
 
     def production_search
-        system("clear")
-        puts "Searching by production"
-        input = gets.strip.downcase
+        puts "===================================="
+        puts "What show would you like to explore?"
+        puts "===================================="
+        puts ""
+            input = gets.strip
         if input == "exit"
             goodbye 
         else
