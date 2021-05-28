@@ -5,7 +5,10 @@ class Production
 
     def initialize(label, year = nil, show = nil, details = nil)
         @label = label
-        @@all << self
+        join_year(year) if year
+        join_show(show) if show
+        @details = details
+        @@all << self unless Production.find(label)
     end
 
     def self.all
@@ -14,10 +17,13 @@ class Production
 
     def join_year(year_label)
         year = Year.find_or_create(year_label)
+        self.year = year
         year.productions << self
     end
 
-    def join_show(show)
+    def join_show(show_label)
+        show = Show.find_or_create(show_label)
+        self.show = show
         show.productions << self
     end
 end

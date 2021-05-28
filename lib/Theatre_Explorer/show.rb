@@ -7,7 +7,7 @@ class Show
         @label = label
         @type = type
         @productions = productions
-        @@all << self
+        @@all << self unless Show.find(label)
     end
 
     def self.all

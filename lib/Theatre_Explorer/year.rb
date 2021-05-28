@@ -7,7 +7,7 @@ class Year
     def initialize(label, productions = [])
         @label = label
         @productions = productions
-        @@all << self
+        @@all << self unless Year.find(label)
     end
 
     def self.all
