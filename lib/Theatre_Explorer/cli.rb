@@ -41,12 +41,21 @@ class CLI
             current_year = Time.now.year
 
         if input == "exit"
+
             goodbye 
+
         elsif input.to_i.between?(1832, current_year - 1)
+
             year = Year.find_or_create(input)
             year.display_productions
-            
+            puts "**Select a production by # to see more details**"
+            input = gets.strip.to_i
+            binding.pry
+            selection = year.scraped_list[year.scraped_list.keys[input - 1]]
+            Scraper.new.production(selection)
+
         else
+
             system("clear")
             puts "I'm sorry. That seems to be invalid input.\n
             Please try again."
@@ -54,6 +63,7 @@ class CLI
             system("clear")
             initial_prompt
         end
+
     end
 
     def production_search

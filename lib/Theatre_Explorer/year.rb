@@ -1,6 +1,6 @@
 
 class Year
-    attr_accessor :label, :productions
+    attr_accessor :label, :productions, :scraped_list
     @@all = []
     extend Shared::Findable
 
@@ -8,6 +8,7 @@ class Year
         unless Year.find(label)
             @label = label
             @productions = productions
+            @scraped_list = Scraper.new.year(self.label)
             @@all << self
         end
     end
@@ -20,10 +21,9 @@ class Year
         system("clear")
         puts "Broadway productions from #{@label}"
         puts "-------------------------------------------------"
-            productions.each.with_index(1) do |production, i|
-                puts "#{i}) \t#{production.label}"
+            scraped_list.keys.each.with_index(1) do |production, i|
+                puts "#{i}) \t#{production}"
             end
         puts "-------------------------------------------------"
-        puts "**Select a production by # to see more details**"
     end
 end
