@@ -4,8 +4,9 @@ class Year
     @@all = []
     extend Shared::Findable
 
-    def initialize(label)
+    def initialize(label, productions = [])
         @label = label
+        @productions = productions
         @@all << self
     end
 

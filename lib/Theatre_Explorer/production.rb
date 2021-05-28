@@ -12,7 +12,8 @@ class Production
         @@all
     end
 
-    def join_year(year)
+    def join_year(year_label)
+        year = Year.find_or_create(year_label)
         year.productions << self
     end
 
