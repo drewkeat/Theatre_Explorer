@@ -27,4 +27,11 @@ def reload!(print = true)
     true
 end
 
+Year.new("2019")
+Year.new("1989")
+Year.new("2008")
+Year.new("2007")
+Year.new("2002")
+Year.new("2021")
+
 IRB.start(__FILE__)

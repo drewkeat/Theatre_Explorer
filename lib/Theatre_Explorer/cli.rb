@@ -39,7 +39,8 @@ class CLI
         if input == "exit"
             goodbye 
         else
-
+            year = Year.find_or_create(input)
+            year.display_productions
         end
     end
 
