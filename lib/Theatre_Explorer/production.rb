@@ -4,11 +4,13 @@ class Production
     extend Shared::Findable
 
     def initialize(label, year = nil, show = nil, details = nil)
-        @label = label
-        join_year(year) if year
-        join_show(show) if show
-        @details = details
-        @@all << self unless Production.find(label)
+        unless Production.find(label)
+            @label = label
+            join_year(year) if year
+            join_show(show) if show
+            @details = details
+            @@all << self
+        end
     end
 
     def self.all

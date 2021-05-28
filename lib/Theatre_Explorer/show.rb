@@ -4,10 +4,12 @@ class Show
     extend Shared::Findable
 
     def initialize(label, type = "Unknown", productions = [])
-        @label = label
-        @type = type
-        @productions = productions
-        @@all << self unless Show.find(label)
+        unless Show.find(label)
+            @label = label
+            @type = type
+            @productions = productions
+            @@all << self
+        end
     end
 
     def self.all

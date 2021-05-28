@@ -27,11 +27,14 @@ def reload!(print = true)
     true
 end
 
-Year.new("2019")
-Year.new("1989")
-Year.new("2008")
-Year.new("2007")
-Year.new("2002")
-Year.new("2021")
+Year.new('1999')
+Year.new('2004')
+Year.new('2008')
+Year.new('2019')
+Year.new('1987')
+
+Production.new("Batman", "2004")
+Production.new("Star Wars", "1987")
+Production.new("Hamlet", "2004")
 
 IRB.start(__FILE__)

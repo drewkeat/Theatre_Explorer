@@ -30,21 +30,34 @@ class CLI
     end
 
     def year_search
+        system("clear")
         puts "========================"
         puts "What year would you like to explore?"
         puts "I can pull records dating back to 1832."
         puts "========================"
         puts ""
+        
             input = gets.strip.downcase
+            current_year = Time.now.year
+
         if input == "exit"
             goodbye 
-        else
+        elsif input.to_i.between?(1832, current_year - 1)
             year = Year.find_or_create(input)
             year.display_productions
+            
+        else
+            system("clear")
+            puts "I'm sorry. That seems to be invalid input.\n
+            Please try again."
+            sleep(1)
+            system("clear")
+            initial_prompt
         end
     end
 
     def production_search
+        system("clear")
         puts "===================================="
         puts "What show would you like to explore?"
         puts "===================================="
