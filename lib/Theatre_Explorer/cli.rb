@@ -127,7 +127,6 @@ class CLI
         puts "---------------------------"
         puts "||        Goodbye!       ||"
         puts "==========================="
-        binding.pry
         exit
     end
 end
