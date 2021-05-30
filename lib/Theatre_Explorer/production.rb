@@ -26,6 +26,7 @@ class Production
 
     def join_show(show_label)
         show = Show.find_or_create(show_label)
+        show.type = details["Show type"]
         self.show = show
         show.productions << self
     end
