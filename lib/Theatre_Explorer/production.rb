@@ -3,12 +3,12 @@ class Production
     @@all = []
     extend Shared::Findable
 
-    def initialize(label, year = nil, show = nil, details = nil)
-        unless Production.find(label)
+    def initialize(attributes)
+        unless Production.find(attributes["label"])
             @label = label
+            attributes.each {|k,v| self.send("#{k}=", v)}
             join_year(year) if year
             join_show(show) if show
-            @details = details
             @@all << self
         end
     end
@@ -27,5 +27,17 @@ class Production
         show = Show.find_or_create(show_label)
         self.show = show
         show.productions << self
+    end
+
+    def print
+        puts "========================"
+        puts "#{label}"
+        puts "========================"
+        puts "Show type: #{details["Show type"]}"
+        puts ""
+        puts "
+        Summary:\n
+        #{details["summary"]}\n
+        "
     end
 end

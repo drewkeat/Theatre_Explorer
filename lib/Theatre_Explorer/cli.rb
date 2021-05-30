@@ -50,10 +50,9 @@ class CLI
             year.display_productions
             puts "**Select a production by # to see more details**"
             input = gets.strip.to_i
-            binding.pry
             selection = year.scraped_list[year.scraped_list.keys[input - 1]]
-            Scraper.new.production(selection)
-
+            system("clear")
+            Scraper.new.production(selection).print
         else
 
             system("clear")
