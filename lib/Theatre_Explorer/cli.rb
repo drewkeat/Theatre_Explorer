@@ -52,10 +52,14 @@ class CLI
             input = gets.strip.to_i
             selection = year.scraped_list[year.scraped_list.keys[input - 1]]
             system("clear")
-            Scraper.new.production(selection).print
+            show = Scraper.new.production(selection)
+            show.print
             continue_prompt
+
         else
+
             unclear
+
         end
 
     end
@@ -70,7 +74,13 @@ class CLI
         if input == "exit"
             goodbye 
         else
-            
+            options = Scraper.new.show_search(input)
+            options.keys.each.with_index(1) {|option, index| puts "#{index}) \t #{option}"}
+            input = gets.strip.to_i
+            selection = options[options.keys[input - 1]]
+            show = Scraper.new.production("https://www.broadwayworld.com#{selection}")
+            show.print
+            continue_prompt
         end
     end
 

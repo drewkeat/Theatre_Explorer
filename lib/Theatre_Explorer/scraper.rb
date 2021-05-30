@@ -59,4 +59,11 @@ class Scraper
         attributes["details"]["summary"] = /; (\w.*\.)\w/.match(summary)[1].strip if summary
         attributes
     end
+
+    def show_search(query)
+        landing = Mechanize.new.get("https://www.broadwayworld.com")
+        landing.forms.first.field(:name => "q").value = query
+        search_page = landing.forms.first.submit
+        options = search_page.search("td span").map {|item| [item.text,  item.children.attribute("href").value]}.to_h
+    end
 end
