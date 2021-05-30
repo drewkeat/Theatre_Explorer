@@ -15,11 +15,8 @@ class Scraper
     def production(url)
         landing = Mechanize.new.get(url)
         @page = landing.link_with(:href => /backstage.php/).click
-        # show = page.at("h2").text.gsub(" Show Information","")
-        # year_string = page.at("tr:nth-child(1) td+ td span").text.match(/\d{4}/).to_s
-        # label = "#{show} - #{year_string}"
         attributes = pull_attrs
-        Production.new(attributes)
+        Production.new(attributes) unless Production.find(attributes["label"])
         Production.find(attributes["label"])
     end
 
