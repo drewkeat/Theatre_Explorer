@@ -18,6 +18,7 @@ class Production
     end
 
     def join_year(year_label)
+        year_label = Time.now.year.to_s if year_label == ""
         year = Year.find_or_create(year_label)
         self.year = year
         year.productions << self
@@ -34,10 +35,19 @@ class Production
         puts "#{label}"
         puts "========================"
         puts "Show type: #{details["Show type"]}"
-        puts ""
-        puts "
-        Summary:\n
-        #{details["summary"]}\n
-        "
+        if details["summary"]
+            puts ""
+            puts "Summary: \t #{details["summary"]}\n"
+            puts ""
+        else
+            puts ""
+            puts "Summary: Not available for this production\n"
+            puts ""
+        end
+
+        details.each do |k,v|
+            puts "#{k} \t #{v}" unless k == "summary" || k == "Show type"
+        end
+
     end
 end

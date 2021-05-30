@@ -53,14 +53,9 @@ class CLI
             selection = year.scraped_list[year.scraped_list.keys[input - 1]]
             system("clear")
             Scraper.new.production(selection).print
+            continue_prompt
         else
-
-            system("clear")
-            puts "I'm sorry. That seems to be invalid input.\n
-            Please try again."
-            sleep(1)
-            system("clear")
-            initial_prompt
+            unclear
         end
 
     end
@@ -79,13 +74,35 @@ class CLI
         end
     end
 
+    def continue_prompt
+        puts "\nWould you like to explore more?"
+        input = gets.strip.downcase
+        if input == "n" || input == "no" || input == "exit"
+            goodbye
+        else
+            system("clear")
+            initial_prompt
+        end
+    end
+
+    def unclear
+        system("clear")
+        puts "I'm sorry. That seems to be invalid input.\n
+        Please try again."
+        sleep(1)
+        system("clear")
+        initial_prompt
+    end
+
     def goodbye
+
         system("clear")
         puts "==========================="
         puts "|| Thanks for exploring! ||"
         puts "---------------------------"
         puts "||        Goodbye!       ||"
         puts "==========================="
+        binding.pry
         exit
     end
 end

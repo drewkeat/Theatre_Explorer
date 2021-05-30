@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require "mechanize"
+require "pry"
 
 require_relative "Theatre_Explorer/version"
 require_relative "Theatre_Explorer/shared_modules"
