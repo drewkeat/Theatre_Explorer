@@ -27,18 +27,5 @@ def reload!(print = true)
     true
 end
 
-Year.new('1999')
-Year.new('2004')
-Year.new('2008')
-Year.new('2019')
-Year.new('1987')
-
-Scraper.new.production("https://www.broadwayworld.com/shows/Chicago-3959.html")
-Scraper.new.production("https://www.broadwayworld.com/shows/backstage.php?showid=311650")
-Scraper.new.production("https://www.broadwayworld.com/shows/backstage.php?showid=318163")
-Scraper.new.production("https://www.broadwayworld.com/shows/?showid=313883")
-Scraper.new.production("https://www.broadwayworld.com/shows/?showid=312546")
-Scraper.new.production("https://www.broadwayworld.com/shows/?showid=312524")
-
 
 IRB.start(__FILE__)
