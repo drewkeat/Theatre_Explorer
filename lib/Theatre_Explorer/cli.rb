@@ -84,21 +84,36 @@ class CLI
         else
             #Creates hash with query results as keys and urls as values
             options = Scraper.new.show_search(input)
-            #Displays query results
-            options.keys.each.with_index(1) {|option, index| puts "#{index}) \t #{option}"}
-            puts "Which result would you like to explore?"
-            input = gets.strip.to_i
-            selection = options[options.keys[input - 1]]
-            #Scrapes and instantiates production object based on selection.
-            show = Scraper.new.production("https://www.broadwayworld.com#{selection}")
-            show.print
+            if options.keys.size == 0
+                begin
+                    raise SearchError
+                rescue SearchError => error
+                    puts error.message
+                end
+            else
+                #Displays query results
+                options.keys.each.with_index(1) {|option, index| puts "#{index}) \t #{option}"}
+                puts "Which result would you like to explore?"
+                input = gets.strip.to_i
+                selection = options[options.keys[input - 1]]
+                #Scrapes and instantiates production object based on selection.
+                show = Scraper.new.production("https://www.broadwayworld.com#{selection}")
+                show.print
+            end
             continue_prompt
+        end
+    end
+
+    class SearchError < StandardError
+        def message
+            "Search yielded no results."
         end
     end
 
     #Sequence for repeated searches
     def continue_prompt
         puts "\nWould you like to explore more?"
+        puts "Yes/No"
         input = gets.strip.downcase
         if input == "n" || input == "no" || input == "exit"
             goodbye
