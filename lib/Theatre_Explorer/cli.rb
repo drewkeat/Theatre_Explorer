@@ -95,15 +95,21 @@ class CLI
                 options.keys.each.with_index(1) {|option, index| puts "#{index}) \t #{option}"}
                 puts "Which result would you like to explore?"
                 input = gets.strip.to_i
-                selection = options[options.keys[input - 1]]
-                #Scrapes and instantiates production object based on selection.
-                show = Scraper.new.production("https://www.broadwayworld.com#{selection}")
-                show.print
+                if input.between?(1,options.keys.size)
+                    selection = options[options.keys[input - 1]]
+                    #Scrapes and instantiates production object based on selection.
+                    show = Scraper.new.production("https://www.broadwayworld.com#{selection}")
+                    show.print
+                else
+                    puts "Input error"
+                    sleep(1)
+                    production_search
+                end
             end
             continue_prompt
         end
     end
-
+    #Error to raise in case of empty search results
     class SearchError < StandardError
         def message
             "Search yielded no results."
